@@ -12,8 +12,6 @@ namespace SortByDomain
 {
     public class EmailSorter : IDisposable
     {
-        private const string EVENT_LOG_SOURCE = "Outlook";
-
         private const string RULE_DOMAIN_NAME_MATCH = "^@([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}$";
         private const string TAGS_SMTP_ADDRESS = "http://schemas.microsoft.com/mapi/proptag/0x39FE001E";
 
@@ -45,9 +43,7 @@ namespace SortByDomain
                                  bool createCopyRule,
                                  bool performAction,
                                  bool performMoveAction,
-                                 bool performCopyAction,
-                                 bool createMoveSubdirectories,
-                                 bool createCopySubdirectories)
+                                 bool performCopyAction)
         {
             if (Sorting) return false;
             if (sortFolder == null) return false;
@@ -228,6 +224,12 @@ namespace SortByDomain
                     ruleSet?.Save(false);
                     rules.Add(domain, rule);
                 }
+            }
+            catch
+            {
+                FunctionHelper.ConsumeFinalReleaseNullComObject(rule);
+
+                throw;
             }
             finally
             {

@@ -176,9 +176,7 @@ namespace SortByDomain
                                                    ChkCopyRule.Checked,
                                                    ChkPerformActions.Checked,
                                                    ChkMoveAction.Checked,
-                                                   ChkCopyAction.Checked,
-                                                   ChkMoveSubdirectories.Checked,
-                                                   ChkCopySubdirectories.Checked) ?? false;
+                                                   ChkCopyAction.Checked) ?? false;
         }
 
         private void UpdateUI(Action action)
